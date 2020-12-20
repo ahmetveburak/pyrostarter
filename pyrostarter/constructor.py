@@ -13,27 +13,14 @@ def setup(
     os.mkdir(project_name)
     os.mkdir(f"{project_name}/plugins")
     os.mkdir(f"{project_name}/utils")
+    file_list:list = ["/__main__.py","/Botconfig.py","/plugins/say_hello.py"]
 
     with open(f"{project_name}/__init__.py", "w") as f:
         f.write('__version__ = "0.1.0"')
 
-    with open(f"{project_name}/__main__.py", "w") as f:
-        f.write(
+    for file in file_list:
+        open(f"{project_name}{file}", "w").write(
             phrases["main"]
-            .replace("BOT_NAME", bot_name)
-            .replace("MODULE_NAME", project_name)
-        )
-
-    with open(f"{project_name}/BotConfig.py", "w") as f:
-        f.write(
-            phrases["botconfig"]
-            .replace("BOT_NAME", bot_name)
-            .replace("MODULE_NAME", project_name)
-        )
-
-    with open(f"{project_name}/plugins/say_hello.py", "w") as f:
-        f.write(
-            phrases["plugin"]
             .replace("BOT_NAME", bot_name)
             .replace("MODULE_NAME", project_name)
         )
