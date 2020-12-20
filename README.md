@@ -1,9 +1,3 @@
-<p align="center">
-    <a href="https://github.com/pyrogram/pyrogram">
-        <img src="https://i.imgur.com/BOgY9ai.png" alt="Pyrogram">
-    </a>
-</p>
-
 # Pyrostarter
 
 A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) project file structure.
