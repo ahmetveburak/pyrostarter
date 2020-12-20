@@ -45,3 +45,5 @@ Manually enter your api keys to `projectName/botname.ini` file and run:
 ```
 python -m projectName
 ```
+
+## Credits
