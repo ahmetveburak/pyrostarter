@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import sys
 from pyrostarter.constructor import setup
+from pyrostarter.contents import phrases
 import argparse
 from argparse import RawTextHelpFormatter
 from configparser import ConfigParser
@@ -33,6 +34,14 @@ def get_args():
         required=False,
         help="name of your project",
     )
+
+    parser.add_argument(
+        "-r",
+        "--reponame",
+        required=False,
+        help="name of your repo. default <project name>",
+    )
+
     parser.add_argument(
         "-b",
         "--botname",
@@ -59,9 +68,9 @@ def get_args():
     parser.add_argument(
         "-u",
         "--userbot",
-        choices=["y", "n"],
-        default="n",
-        help="is userbot? default 'n'",
+        choices=["yes", "no"],
+        default="no",
+        help="is userbot? default 'no'",
     )
 
     parser.add_argument(
@@ -72,30 +81,43 @@ def get_args():
         help="name of your bot",
     )
 
+    parser.add_argument(
+        "--venv",
+        choices=["yes", "no"],
+        default="no",
+        required=False,
+        help="create virtual enviroment in project. pass if you use poetry",
+    )
+    parser.add_argument(
+        "--poetry",
+        choices=["yes", "no"],
+        default="no",
+        required=False,
+        help="create pyproject.toml template in project",
+    )
+
     args = parser.parse_args()
     if len(sys.argv) == 1:
         parser.print_help()
         quit()
     return args
 
-    # TODO intermixed args
-    # parser.add_argument(
-    #     "projectname",
-    #     help="name of your project",
-    # )
-    # parser.add_argument(
-    #     "botname",
-    #     help="name of your bot",
-    # )
-
 
 def main() -> None:
     args = get_args()
+
+    if any(" " in i for i in [args.projectname, args.botname, args.reponame]):
+        print("Whitespace not allowed in names. Aborted..")
+        quit()
+
     project_name = args.projectname
     bot_name = args.botname
+    repo_name = args.reponame if args.reponame else project_name
+    poetry = args.poetry
+    virtualenv = args.venv if poetry != "yes" else "no"
 
     config = ConfigParser()
-    config.read(f"{mod_path}/pyrouser.ini")
+    config.read(f"{mod_path}/.pyrouser.ini")
 
     if config.sections() == []:
         print(
@@ -106,7 +128,7 @@ def main() -> None:
         config["pyrouser"]["API_HASH"] = ""
         config["pyrouser"]["BOT_TOKEN"] = ""
         config["pyrouser"]["USER_CONF"] = ""
-        with open(f"{mod_path}/pyrouser.ini", "w") as f:
+        with open(f"{mod_path}/.pyrouser.ini", "w") as f:
             config.write(f)
 
     if args.clear == "all":
@@ -136,7 +158,7 @@ def main() -> None:
         config["pyrouser"]["USER_CONF"] = "YES"
 
     if args.id or args.hash or args.token or args.clear:
-        with open(f"{mod_path}/pyrouser.ini", "w") as f:
+        with open(f"{mod_path}/.pyrouser.ini", "w") as f:
             config.write(f)
 
     if config["pyrouser"]["USER_CONF"] and project_name and bot_name:
@@ -145,23 +167,65 @@ def main() -> None:
         bot_token = config["pyrouser"]["BOT_TOKEN"] if args.userbot == "n" else ""
 
         print(
-            f"Your project will be created..\n"
-            f"Project Name: {project_name}\n"
-            f"Bot Name:     {bot_name}\n"
+            f"Repository Name: {repo_name}\n"
+            f"Project Name:    {project_name}\n"
+            f"Bot Name:        {bot_name}\n"
+            f"Userbot:         {args.userbot.capitalize()}\n"
+            f"Venv:            {args.venv.capitalize()}\n"
+            f"Poetry:          {args.poetry.capitalize()}\n"
             f"API_ID:       Provided\n"
             f"API_HASH:     Provided\n"
+            f"BOT_TOKEN:    Provided\n"
         )
 
-        setup(project_name, bot_name, api_id, api_hash, bot_token)
+        sure = input(
+            f"Your project will be created as above. Do you want to continue?\n"
+            "press enter to continue or 'no' to quit: "
+        ).lower()
+
+        if sure not in ["n", "no"]:
+            setup(
+                repo_name,
+                project_name,
+                bot_name,
+                api_id,
+                api_hash,
+                bot_token,
+                virtualenv,
+                poetry,
+            )
+
+        else:
+            print("Aborted..")
+            quit()
 
     elif project_name and bot_name:
         print(
-            f"Your project will be created..\n"
-            f"Project Name: {project_name}\n"
-            f"Bot Name:     {bot_name}\n"
+            f"Repository Name: {repo_name}\n"
+            f"Project Name:    {project_name}\n"
+            f"Bot Name:        {bot_name}\n"
+            f"Userbot:         {args.userbot.capitalize()}\n"
+            f"Venv:            {virtualenv.capitalize()}\n"
+            f"Poetry:          {poetry.capitalize()}\n"
             f"API_ID, API_HASH or BOT_TOKEN are not provided. You should manually enter to {bot_name}.ini file\n"
         )
-        setup(project_name, bot_name)
+
+        sure = input(
+            f"Your project will be created as above. Do you want to continue?\n"
+            "press enter to continue or 'n/no' to quit: "
+        ).lower()
+        if sure not in ["n", "no"]:
+            setup(
+                repo_name,
+                project_name,
+                bot_name,
+                virtualenv,
+                poetry,
+            )
+
+        else:
+            print("Aborted..")
+            quit()
 
 
 if __name__ == "__main__":

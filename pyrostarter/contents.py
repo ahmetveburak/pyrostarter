@@ -104,4 +104,27 @@ def button_maker(buttons: dict, size: int) -> InlineKeyboardMarkup:
 
     return InlineKeyboardMarkup(buttons)
 """,
+    "poetry": """\
+[tool.poetry]
+name = "bottester"
+version = "0.1.0"
+description = "YOUR DESCRIPTION"
+authors = ["YOU <ABOUT@YOU.COM>"]
+license = "YOUR LICENSE"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pyrogram = "*"
+tgcrypto = "*"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+""",
+    "requirements": """\
+pyrogram > 1.0.0
+tgcrypto
+""",
 }
