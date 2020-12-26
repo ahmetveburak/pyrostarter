@@ -110,7 +110,9 @@ def get_args():
 def main() -> None:
     args = get_args()
 
-    if any(" " in i for i in [args.projectname, args.botname, args.reponame]):
+    if any(
+        " " in i for i in [args.projectname, args.botname, args.reponame] if i != None
+    ):
         print("Whitespace not allowed in names. Aborted..")
         quit()
 
