@@ -13,15 +13,19 @@ mod_path = os.getenv("HOME")
 def get_args():
 
     structure = """.
-└── projectname
-    ├── plugins
-    │   └── say_hello.py
-    ├── utils
-    │   └── buttonator.py
-    ├── __init__.py
-    ├── __main__.py
-    ├── BotConfig.py
-    └── botname.ini """
+└── repo_name
+    └── .venv (optional)
+    └── pyproject.toml (optional)
+    └── project_name
+        ├── plugins
+        │   └── say_hello.py
+        ├── utils
+        │   └── buttonator.py
+        ├── __init__.py
+        ├── __main__.py
+        ├── BotConfig.py
+        └── botname.ini
+"""
 
     parser = argparse.ArgumentParser(
         description=f"A Pyrogram project template starter\n{structure}",
@@ -185,14 +189,14 @@ def main() -> None:
 
         if sure not in ["n", "no"]:
             setup(
-                repo_name,
-                project_name,
-                bot_name,
-                api_id,
-                api_hash,
-                bot_token,
-                virtualenv,
-                poetry,
+                repo_name=repo_name,
+                project_name=project_name,
+                bot_name=bot_name,
+                api_id=api_id,
+                api_hash=api_hash,
+                bot_token=bot_token,
+                virtualenv=virtualenv,
+                poetry=poetry,
             )
 
         else:
@@ -216,11 +220,11 @@ def main() -> None:
         ).lower()
         if sure not in ["n", "no"]:
             setup(
-                repo_name,
-                project_name,
-                bot_name,
-                virtualenv,
-                poetry,
+                repo_name=repo_name,
+                project_name=project_name,
+                bot_name=bot_name,
+                virtualenv=virtualenv,
+                poetry=poetry,
             )
 
         else:
