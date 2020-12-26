@@ -106,7 +106,7 @@ def button_maker(buttons: dict, size: int) -> InlineKeyboardMarkup:
 """,
     "poetry": """\
 [tool.poetry]
-name = "bottester"
+name = "MODULE_NAME"
 version = "0.1.0"
 description = "YOUR DESCRIPTION"
 authors = ["YOU <ABOUT@YOU.COM>"]
