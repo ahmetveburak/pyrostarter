@@ -13,14 +13,13 @@ def setup(
     poetry: str = "no",
 ) -> None:
 
-    # os.mkdir(repo_name)
     os.makedirs(f"{repo_name}/{project_name}/plugins")
     os.makedirs(f"{repo_name}/{project_name}/utils")
 
     file_list: list = ["/__main__.py", "/BotConfig.py", "/plugins/say_hello.py"]
     file_phrases: list = ["main", "botconfig", "plugin"]
 
-    if poetry == "no" and virtualenv == "yes":
+    if virtualenv == "yes":
         try:
             import venv
 
@@ -28,12 +27,10 @@ def setup(
             with open(f"{repo_name}/requirements.txt", "w") as f:
                 f.write(phrases["requirements"])
 
-            print("virtual enviroment created")
-
         except ModuleNotFoundError:
             print("venv module not found. install and create yourself manually\n")
 
-    if poetry == "yes" and virtualenv == "no":
+    if poetry == "yes":
         with open(f"{repo_name}/pyproject.toml", "w") as f:
             f.write(phrases["poetry"].replace("MODULE_NAME", project_name))
 
