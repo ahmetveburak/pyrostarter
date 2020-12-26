@@ -13,13 +13,13 @@ def setup(
     os.mkdir(project_name)
     os.mkdir(f"{project_name}/plugins")
     os.mkdir(f"{project_name}/utils")
-    file_list:list = ["/__main__.py","/Botconfig.py","/plugins/say_hello.py"]
-    file_phrases:list = ["main","botconfig","plugin"]
+    file_list: list = ["/__main__.py", "/BotConfig.py", "/plugins/say_hello.py"]
+    file_phrases: list = ["main", "botconfig", "plugin"]
 
     with open(f"{project_name}/__init__.py", "w") as f:
         f.write('__version__ = "0.1.0"')
 
-    for file,phrase in zip(file_list,file_phrases):
+    for file, phrase in zip(file_list, file_phrases):
         open(f"{project_name}{file}", "w").write(
             phrases[phrase]
             .replace("BOT_NAME", bot_name)
@@ -29,7 +29,7 @@ def setup(
     with open(f"{project_name}/utils/buttonator.py", "w") as f:
         f.write(phrases["util"])
 
-    if api_id != "":
+    if not api_id.strip():
         with open(f"{project_name}/{bot_name.lower()}.ini", "w") as f:
             f.write(
                 phrases["config"]

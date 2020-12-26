@@ -1,15 +1,18 @@
 phrases = {
-    "main": """from MODULE_NAME.BotConfig import BOT_NAME
+    "main": """\
+from MODULE_NAME.BotConfig import BOT_NAME
 
 if __name__ == "__main__":
     BOT_NAME().run()
 """,
-    "config": """[pyrogram]
+    "config": """\
+[pyrogram]
 API_ID = api_id
 API_HASH = api_hash
 BOT_TOKEN = bot_token
     """,
-    "botconfig": """from pyrogram import Client
+    "botconfig": """\
+from pyrogram import Client
 from pyrogram.types import Message
 
 
@@ -28,8 +31,10 @@ class BOT_NAME(Client, Message):
         await super().start()
 
     async def stop(self, *args):
-        await super().stop()""",
-    "plugin": """from pyrogram import Client, filters
+        await super().stop()
+""",
+    "plugin": """\
+from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery
 from functools import partial
 from MODULE_NAME.BotConfig import BOT_NAME
@@ -83,7 +88,8 @@ async def buttons(client: Client, message: Message):
 @BOT_NAME.on_callback_query(button_filter)
 async def reply_callback(_: Client, callback=CallbackQuery):
     await callback.message.reply_text(text=callback.data)""",
-    "util": """from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
+    "util": """\
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 
 def slicer(button_list: list, size: int) -> list:
