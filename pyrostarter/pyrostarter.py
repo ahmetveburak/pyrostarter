@@ -110,9 +110,7 @@ def get_args():
 def main() -> None:
     args = get_args()
 
-    if any(
-        " " in i for i in [args.projectname, args.botname, args.reponame] if i != None
-    ):
+    if any(" " in i for i in [args.projectname, args.botname, args.reponame] if i != None):
         print("Whitespace not allowed in names. Aborted..")
         quit()
 
@@ -170,7 +168,7 @@ def main() -> None:
     if config["pyrouser"]["USER_CONF"] and project_name and bot_name:
         api_id = config["pyrouser"]["API_ID"]
         api_hash = config["pyrouser"]["API_HASH"]
-        bot_token = config["pyrouser"]["BOT_TOKEN"] if args.userbot == "n" else ""
+        bot_token = config["pyrouser"]["BOT_TOKEN"] if args.userbot == "no" else ""
 
         print(
             f"Repository Name: {repo_name}\n"

@@ -39,22 +39,16 @@ def setup(
 
     for file, phrase in zip(file_list, file_phrases):
         open(f"{repo_name}/{project_name}{file}", "w").write(
-            phrases[phrase]
-            .replace("BOT_NAME", bot_name)
-            .replace("MODULE_NAME", project_name)
+            phrases[phrase].replace("BOT_NAME", bot_name).replace("MODULE_NAME", project_name)
         )
 
     with open(f"{repo_name}/{project_name}/utils/buttonator.py", "w") as f:
         f.write(phrases["util"])
 
-    if not api_id.strip():
-        with open(f"{repo_name}/{project_name}/{bot_name.lower()}.ini", "w") as f:
-            f.write(
-                phrases["config"]
-                .replace("api_id", api_id)
-                .replace("api_hash", api_hash)
-                .replace("bot_token", bot_token)
-            )
-    else:
-        with open(f"{repo_name}/{project_name}/{bot_name.lower()}.ini", "w") as f:
-            f.write(phrases["config"])
+    with open(f"{repo_name}/{project_name}/{bot_name.lower()}.ini", "w") as f:
+        f.write(
+            phrases["config"]
+            .replace("api_id", api_id)
+            .replace("api_hash", api_hash)
+            .replace("bot_token", bot_token)
+        )

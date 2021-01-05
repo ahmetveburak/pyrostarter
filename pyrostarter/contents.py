@@ -113,7 +113,7 @@ authors = ["YOU <ABOUT@YOU.COM>"]
 license = "YOUR LICENSE"
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.6"
 pyrogram = "*"
 tgcrypto = "*"
 
