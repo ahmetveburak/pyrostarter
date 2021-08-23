@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-import sys
-from pyrostarter.constructor import setup
-from pyrostarter.contents import phrases
 import argparse
+import os
+import sys
 from argparse import RawTextHelpFormatter
 from configparser import ConfigParser
-import os
+
+from pyrostarter.constructor import setup
 
 mod_path = os.getenv("HOME")
 
@@ -218,6 +218,9 @@ def main() -> None:
         else:
             print("Aborted..")
             quit()
+
+    else:
+        print("Project name or bot name not defined..")
 
 
 if __name__ == "__main__":
