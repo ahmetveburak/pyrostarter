@@ -87,17 +87,10 @@ def get_args():
 
     parser.add_argument(
         "--venv",
-        choices=["yes", "no"],
-        default="no",
+        choices=["virtualenv", "poetry"],
+        default="none",
         required=False,
-        help="create virtual enviroment in project. pass if you use poetry",
-    )
-    parser.add_argument(
-        "--poetry",
-        choices=["yes", "no"],
-        default="no",
-        required=False,
-        help="create pyproject.toml template in project",
+        help="select your virtual enviroment in type",
     )
 
     args = parser.parse_args()
@@ -117,8 +110,7 @@ def main() -> None:
     project_name = args.projectname
     bot_name = args.botname
     repo_name = args.reponame if args.reponame else project_name
-    poetry = args.poetry
-    virtualenv = args.venv if poetry != "yes" else "no"
+    virtualenv = args.venv
 
     config = ConfigParser()
     config.read(f"{mod_path}/.pyrouser.ini")
@@ -175,8 +167,7 @@ def main() -> None:
             f"Project Name:    {project_name}\n"
             f"Bot Name:        {bot_name}\n"
             f"Userbot:         {args.userbot.capitalize()}\n"
-            f"Venv:            {args.venv.capitalize()}\n"
-            f"Poetry:          {args.poetry.capitalize()}\n"
+            f"Venv Type:       {virtualenv.capitalize()}\n"
             f"API_ID:       Provided\n"
             f"API_HASH:     Provided\n"
             f"BOT_TOKEN:    Provided\n"
@@ -195,8 +186,7 @@ def main() -> None:
                 api_id=api_id,
                 api_hash=api_hash,
                 bot_token=bot_token,
-                virtualenv=virtualenv,
-                poetry=poetry,
+                venv_type=virtualenv,
             )
 
         else:
@@ -209,8 +199,7 @@ def main() -> None:
             f"Project Name:    {project_name}\n"
             f"Bot Name:        {bot_name}\n"
             f"Userbot:         {args.userbot.capitalize()}\n"
-            f"Venv:            {virtualenv.capitalize()}\n"
-            f"Poetry:          {poetry.capitalize()}\n"
+            f"Venv Type:       {virtualenv.capitalize()}\n"
             f"API_ID, API_HASH or BOT_TOKEN are not provided. You should manually enter to {bot_name}.ini file\n"
         )
 
@@ -223,8 +212,7 @@ def main() -> None:
                 repo_name=repo_name,
                 project_name=project_name,
                 bot_name=bot_name,
-                virtualenv=virtualenv,
-                poetry=poetry,
+                venv_type=virtualenv,
             )
 
         else:
