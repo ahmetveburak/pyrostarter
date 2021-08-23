@@ -1,12 +1,20 @@
-from pyrostarter.contents import phrases
 import os
+
+from pyrostarter.contents import phrases
 
 
 def virtualenv_type(repo_name: str):
     try:
-        import venv
+        from venv import EnvBuilder
 
-        venv.create(f"{repo_name}/.venv")
+        venv_manager = EnvBuilder(
+            system_site_packages=False,
+            clear=True,
+            symlinks=False,
+            with_pip=True,
+        )
+        venv_manager.create(f"{repo_name}/.venv")
+
         with open(f"{repo_name}/requirements.txt", "w") as f:
             f.write(phrases["requirements"])
 
