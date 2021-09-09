@@ -44,8 +44,8 @@ def builder(
     os.makedirs(f"{project_name}/utils")
 
     venv_dict = {
-        "virtualenv": virtualenv_type,
-        "poetry": poetry_type,
+        "Standart": virtualenv_type,
+        "Poetry": poetry_type,
     }
 
     venv_dict.get(venv_type, none_venv)(project_name)
