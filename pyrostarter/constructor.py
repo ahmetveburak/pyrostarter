@@ -3,7 +3,11 @@ import os
 from pyrostarter.contents import phrases
 
 
-def virtualenv_type() -> None:
+def none_venv(none) -> None:
+    pass
+
+
+def virtualenv_type(none) -> None:
     try:
         from venv import EnvBuilder
 
@@ -40,11 +44,12 @@ def builder(
     os.makedirs(f"{project_name}/utils")
 
     venv_dict = {
-        "virtualenv": virtualenv_type(),
-        "poetry": poetry_type(project_name=project_name),
+        "virtualenv": virtualenv_type,
+        "poetry": poetry_type,
+        "none": none_venv,
     }
 
-    venv_dict.get(venv_type)
+    venv_dict.get(venv_type)(project_name)
 
     file_list: list = ["/__main__.py", "/BotConfig.py", "/plugins/say_hello.py"]
     file_phrases: list = ["main", "botconfig", "plugin"]
