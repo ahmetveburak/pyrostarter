@@ -109,7 +109,7 @@ class InitCommand(Command):
             api_id=api_id if api_id else "",
             api_hash=api_hash if api_hash else "",
             bot_token=bot_token if userbot else "",
-            venv_type=venv_type,
+            venv_type=venvs.get(venv_type),
         )
 
     def check_answer(self, answer: str) -> bool:
