@@ -46,10 +46,9 @@ def builder(
     venv_dict = {
         "virtualenv": virtualenv_type,
         "poetry": poetry_type,
-        "none": none_venv,
     }
 
-    venv_dict.get(venv_type)(project_name)
+    venv_dict.get(venv_type, none_venv)(project_name)
 
     file_list: list = ["/__main__.py", "/BotConfig.py", "/plugins/say_hello.py"]
     file_phrases: list = ["main", "botconfig", "plugin"]
