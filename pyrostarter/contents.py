@@ -11,6 +11,13 @@ API_ID = api_id
 API_HASH = api_hash
 BOT_TOKEN = bot_token
     """,
+    "user_config": """\
+[pyrouser]
+API_ID = 
+API_HASH = 
+BOT_TOKEN = 
+USER_CONF = 
+    """,
     "botconfig": """\
 from pyrogram import Client
 from pyrogram.types import Message
