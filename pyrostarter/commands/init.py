@@ -29,7 +29,7 @@ class InitCommand(Command):
 
         super(InitCommand, self).__init__()
 
-    def handle(self) -> Optional[int]:
+    def handle(self) -> None:
         self.add_style("opt", fg="red", options=["bold"])
         if self.io.is_interactive():
             self.line("")
@@ -57,19 +57,16 @@ class InitCommand(Command):
 
         api_id = self.option("api-id")
         if not api_id:
-            api_id = ""
             question = self.create_question("Your API ID:")
             api_id = self.ask(question)
 
         api_hash = self.option("api-hash")
         if not api_hash:
-            api_hash = ""
             question = self.create_question("Your API Hash:")
             api_hash = self.ask(question)
 
         bot_token = self.option("bot-token")
         if not bot_token:
-            bot_token = ""
             question = self.create_question("Your Bot Token:")
             bot_token = self.ask(question)
 
@@ -106,13 +103,11 @@ class InitCommand(Command):
             self.line("<error>Aborted..</>")
             return
 
-        self.line("<error>Not Aborted..</>")
-
         builder(
             project_name=project_name,
             bot_name=bot_name,
-            api_id=api_id,
-            api_hash=api_hash,
+            api_id=api_id if api_id else "",
+            api_hash=api_hash if api_hash else "",
             bot_token=bot_token if userbot else "",
             venv_type=venv_type,
         )
