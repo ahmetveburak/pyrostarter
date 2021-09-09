@@ -69,6 +69,7 @@ class InitCommand(Command):
         if not bot_token:
             question = self.create_question("Your Bot Token:")
             bot_token = self.ask(question)
+            bot_token = bot_token if bot_token else ""
 
         userbot = self.option("userbot")
         if not userbot:
