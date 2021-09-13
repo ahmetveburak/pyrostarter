@@ -1,8 +1,5 @@
-<p align="center">
-    <a href="https://github.com/pyrogram/pyrogram">
-        <img src="https://i.imgur.com/BOgY9ai.png" alt="Pyrogram" width="300">
-    </a>
-</p>
+<a href="https://github.com/python/black"><img alt="Code style: black" src="https://img.shields.io/badge/code%20style-black-000000.svg"></a>
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
 
 # Pyrostarter
 
@@ -19,6 +16,7 @@ pip install git+https://github.com/ahmetveburak/pyrostarter.git
 ```
 └── repo_name
     └── .venv (optional)
+    └── requirement.txt (comes with built-in venv)
     └── pyproject.toml (optional)
     └── project_name
         ├── plugins
@@ -31,43 +29,30 @@ pip install git+https://github.com/ahmetveburak/pyrostarter.git
         └── botname.ini
 ```
 
-## Usage
+## Basic Usage
 
-- Arguments:
-  - `-h --help`: prints help about tool
-  - `-p --projectname:` project name for your file structure
-  - `--reponame`: main project folder as repository name 
-  - `-b --botname`: your bot's name
-  - `-c --clear`: clear your .ini file [id, hash, token, all]
-  - `-u --userbot`: [yes, no]
-  - `--venv`: creates virtual enviroment named .venv in project [yes, no]
-  - `--poetry`: creates pyproject.toml file [yes, no]
+Create a folder for the bot to initialize project.
 
-- One time configurated parameters for initialize project faster. Configuration will be file saved to $HOME/.pyrouser.ini
-  - `-i --id`: your Telegram API_ID
-  - `-a --hash`: your Telegram API_HASH
-  - `-t --token`: your Telegram BOT_TOKEN
-  
+`$ mkdir PyrostarterBot`
 
-Running project:
+Run command
+`$ pyrostarter init`
 
-```
-$ pyrostarter -r repo_name -p project_name -b BotName
-$ python -m project_name
-```
-If api keys not provided, manually enter your api keys to `projectName/botname.ini` file before running the bot.
+That's it, follow the edit the `project_name/bot_name.ini` file and if you have already installed the dependencies run your bot.
+`$ python -m project_name`
 
-Save your api keys locally or update them with same command. Delete your keys `-c` or `--clear` command with parameters `id, hash, token, all`.
-```
-pyrostarter -i api_id -a api_hash -t bot_token
-```
+## Config
 
-More initialize settings
-```
-pyrostarter -r repoName -p projectName -b BotName --venv yes
-pyrostarter -r repoName -p projectName -b BotName --poetry yes
-```
+Save your bot information in your local and automically create full `.ini` folder.
+`$ pyrostarter config`
+
 
 ## Credits
+<p align="center">
+    <a href="https://github.com/pyrogram/pyrogram">
+        <img src="https://i.imgur.com/BOgY9ai.png" alt="Pyrogram" width="300">
+    </a>
+</p>
+
 [Pyrogram | Telegram MTProto API Framework for Python](https://github.com/pyrogram/pyrogram)
 [Dan | Creator of Pyrogram](https://github.com/delivrance)
