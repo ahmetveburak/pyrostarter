@@ -83,7 +83,6 @@ class InitCommand(Command):
             self.line("<comment>\nVirtual enviroment type? Default: No virtual environment.</>\n")
             question = self.create_question("Standart, Poetry (s/p):", default=venv_type)
             venv_type = self.ask(question).lower()
-            print(venv_type)
 
         venvs = {"s": "Standart", "p": "Poetry"}
 

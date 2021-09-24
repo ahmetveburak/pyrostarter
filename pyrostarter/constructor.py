@@ -8,6 +8,9 @@ def none_venv(none) -> None:
 
 
 def virtualenv_type(none) -> None:
+    if os.path.exists(".venv"):
+        print("A folder `.venv` already exists at this location.\nAborted..")
+        return
     try:
         from venv import EnvBuilder
 
