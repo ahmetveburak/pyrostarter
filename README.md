@@ -58,6 +58,9 @@ Standart, Poetry (s/p):
 ```
 
 Run your project
+```shell
+python -m <project_name>
+```
 
 ## Credits
 [Pyrogram | Telegram MTProto API Framework for Python](https://github.com/pyrogram/pyrogram)
