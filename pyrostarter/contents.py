@@ -12,19 +12,23 @@ API_HASH = api_hash
 BOT_TOKEN = bot_token
     """,
     "botconfig": """\
-from pyrogram import Client
+from pyrogram import Client, filters
 from pyrogram.types import Message
+
+from functools import partial
+
+command = partial(filters.command, prefixes=["!", "/", "."])
 
 
 class BOT_NAME(Client, Message):
     def __init__(self):
-        moduleName = "MODULE_NAME"
+        module_name = "MODULE_NAME"
         name = self.__class__.__name__.lower()
         super().__init__(
             session_name=name,
-            config_file=f"{moduleName}/{name}.ini",
+            config_file=f"{module_name}/{name}.ini",
             workers=8,
-            plugins=dict(root=f"{moduleName}/plugins"),
+            plugins=dict(root=f"{module_name}/plugins"),
         )
 
     async def start(self):
@@ -36,12 +40,9 @@ class BOT_NAME(Client, Message):
     "plugin": """\
 from pyrogram import Client, filters
 from pyrogram.types import Message, CallbackQuery
-from functools import partial
-from MODULE_NAME.BotConfig import BOT_NAME
+from MODULE_NAME.BotConfig import BOT_NAME, command
 from MODULE_NAME.utils import buttonator
 import asyncio, time
-
-command = partial(filters.command, prefixes=["!", "/", "."])
 
 
 @BOT_NAME.on_message(command("start"))
@@ -113,7 +114,7 @@ authors = ["YOU <ABOUT@YOU.COM>"]
 license = "YOUR LICENSE"
 
 [tool.poetry.dependencies]
-python = "^3.6"
+python = "^3.9"
 pyrogram = "*"
 tgcrypto = "*"
 
