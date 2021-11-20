@@ -21,7 +21,7 @@ A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) ready to start pr
 ## Installation
 
 ```
-pip install git+https://github.com/ahmetveburak/pyrostarter.git
+pip install pyrostarter
 ```
 
 ## Usage
