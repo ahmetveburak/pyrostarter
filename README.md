@@ -1,9 +1,3 @@
-<p align="center">
-    <a href="https://github.com/pyrogram/pyrogram">
-        <img src="https://i.imgur.com/BOgY9ai.png" alt="Pyrogram" width="300">
-    </a>
-</p>
-
 # Pyrostarter
 
 A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) ready to start project structure. (*All my lazy options included.* 😄)
@@ -16,9 +10,9 @@ A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) ready to start pr
     └── pyproject.toml (optional)
     └── project_name
         ├── plugins
-        │   └── say_hello.py
+        │   └── say_hello.py
         ├── utils
-        │   └── buttonator.py
+        │   └── buttonator.py
         ├── __init__.py
         ├── __main__.py
         ├── BotConfig.py
@@ -65,3 +59,9 @@ python -m <project_name>
 ## Credits
 [Pyrogram | Telegram MTProto API Framework for Python](https://github.com/pyrogram/pyrogram)
 [Dan | Creator of Pyrogram](https://github.com/delivrance)
+
+<p align="center">
+    <a href="https://github.com/pyrogram/pyrogram">
+        <img src="https://i.imgur.com/BOgY9ai.png" alt="Pyrogram" width="300">
+    </a>
+</p>

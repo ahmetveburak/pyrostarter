@@ -2,6 +2,7 @@ from typing import Optional
 
 from cleo import Command
 from cleo.helpers import option
+
 from pyrostarter.constructor import builder
 
 
@@ -80,12 +81,10 @@ class InitCommand(Command):
         venv_type = self.option("venv-type")
         if not venv_type:
             venv_type = "no"
-            self.line("<comment>\nVirtual enviroment type? Default: No virtual environment.</>\n")
-            question = self.create_question("Standart, Poetry (s/p):", default=venv_type)
+            question = self.create_question("Virtual enviroment? Built-In, Poetry, No Venv (b/p/n):", default=venv_type)
             venv_type = self.ask(question).lower()
-            print(venv_type)
 
-        venvs = {"s": "Standart", "p": "Poetry"}
+        venvs = {"b": "Standart", "p": "Poetry"}
 
         self.line(
             f"<info>Project Name  :</> <comment>{project_name}\n</>"
@@ -118,10 +117,9 @@ class InitCommand(Command):
             self.line("<error>This field is required.</error>\n")
             return False
         elif " " in answer:
-            self.line("<error>No whitespace allowed in this field.</error>\n")
+            self.line("<error>Whitespace not allowed.</error>\n")
             return False
         elif answer[0].isdigit():
             self.line("<error>The field name cannot start with digits.</error>\n")
             return False
-        else:
-            return True
+        return True
