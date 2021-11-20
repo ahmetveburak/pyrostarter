@@ -2,7 +2,7 @@
 name = "pyrostarter"
 version = "0.2.0"
 description = "Pyrogram CLI Template Creator"
-authors = ["ahmetveburak <https://t.me/musaitbiyerde>"]
+authors = ["ahmetveburak <ahmetbozyurtt@gmail.com>"]
 license = "GNU General Public License v3 or later (GPLv3+)"
 
 [tool.poetry.dependencies]
