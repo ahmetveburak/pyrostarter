@@ -15,7 +15,7 @@ entry_points = {"console_scripts": ["pyrostarter = pyrostarter.pyrostarter:main"
 
 setup(
     name="pyrostarter",
-    version="0.1.5",
+    version="0.2.0",
     description="A CLI tool for creating Pyrogram project file structure",
     author="ahmetveburak",
     url="https://github.com/ahmetveburak/pyrostarter",
