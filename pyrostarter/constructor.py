@@ -64,7 +64,7 @@ def builder(
     with open(f"{project_name}/utils/buttonator.py", "w") as f:
         f.write(phrases["util"])
 
-    with open(f"{project_name}/{bot_name.lower()}.ini", "w") as f:
+    with open(f"{bot_name.lower()}.ini", "w") as f:
         f.write(
             phrases["config"].replace("api_id", api_id).replace("api_hash", api_hash).replace("bot_token", bot_token)
         )

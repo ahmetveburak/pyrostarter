@@ -33,7 +33,7 @@ class BOT_NAME(Client, Message):
         name = self.__class__.__name__.lower()
         super().__init__(
             session_name=name,
-            config_file=f"{module_name}/{name}.ini",
+            config_file=f"{name}.ini",
             workers=8,
             plugins=dict(root=f"{module_name}/plugins"),
         )
@@ -122,8 +122,8 @@ license = "YOUR LICENSE"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-pyrogram = "*"
-tgcrypto = "*"
+Pyrogram = "^1.2.9"
+TgCrypto = "^1.2.2"
 
 [tool.poetry.dev-dependencies]
 
@@ -132,7 +132,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 """,
     "requirements": """\
-pyrogram > 1.0.0
-tgcrypto
+pyrogram>=1.2.9;
+tgcrypto>=1.2.2;
 """,
 }
