@@ -9,7 +9,7 @@ package_data = {"": ["*"]}
 
 extras_require = {"publish": ["flit"]}
 
-install_requires=['cleo']
+install_requires = ["cleo"]
 
 entry_points = {"console_scripts": ["pyrostarter = pyrostarter.pyrostarter:main"]}
 
@@ -24,5 +24,5 @@ setup(
     extras_require=extras_require,
     entry_points=entry_points,
     python_requires=">=3.6.0",
-    install_requires= install_requires
+    install_requires=install_requires,
 )

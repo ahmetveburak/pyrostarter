@@ -4,6 +4,7 @@ from typing import Optional
 
 from cleo import Command
 from cleo.helpers import option
+
 from pyrostarter.contents import phrases
 
 

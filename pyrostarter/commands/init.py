@@ -81,7 +81,9 @@ class InitCommand(Command):
         venv_type = self.option("venv-type")
         if not venv_type:
             venv_type = "no"
-            question = self.create_question("Virtual enviroment? Built-In, Poetry, No Venv (b/p/n):", default=venv_type)
+            question = self.create_question(
+                "Virtual enviroment? Built-In, Poetry, No Venv (b/p/n):", default=venv_type
+            )
             venv_type = self.ask(question).lower()
 
         venvs = {"b": "Standart", "p": "Poetry"}
