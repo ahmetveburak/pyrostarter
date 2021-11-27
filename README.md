@@ -29,6 +29,7 @@ pip install pyrostarter
 Create a directory for your project. In your project directory run the command and follow the instructions:
 ```shell
 $ mkdir YourProject
+$ cd YourProject
 $ pyrostarter init
 ```
 
@@ -45,10 +46,7 @@ Your API ID: <api_id>
 Your API Hash: <api_hash>
 Your Bot Token: <bot_token>
 Is user bot?: (yes/no) [no] 
-
-Virtual enviroment type? Default: No virtual environment.
-
-Standart, Poetry (s/p):
+Virtual enviroment? Built-In, Poetry, No Venv (b/p/n):
 ```
 
 Run your project
