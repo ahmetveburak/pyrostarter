@@ -38,6 +38,3 @@ exclude = '''
 [tool.isort]
 line_length = 119
 skip_gitignore = true
-
-[tool.mypy]
-disable_error_code = "func_no_return"
