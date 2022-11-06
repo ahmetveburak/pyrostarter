@@ -1,5 +1,3 @@
-from typing import Optional
-
 from cleo import Command
 from cleo.helpers import option
 
@@ -19,7 +17,7 @@ class InitCommand(Command):
         option("userbot", description="Is userbot?", flag=False),
         option(
             "venv-type",
-            description="Standart/Poetry?, default: no virtual environment",
+            description="Standard/Poetry?, default: no virtual environment",
             flag=False,
         ),
     ]
@@ -27,14 +25,15 @@ class InitCommand(Command):
     help = "The init command starts the interactive bot setup."
 
     def __init__(self):
-
         super(InitCommand, self).__init__()
 
     def handle(self) -> None:
         self.add_style("opt", fg="red", options=["bold"])
         if self.io.is_interactive():
             self.line("")
-            self.line("This command will guide you through creating your <info>Telegram Bot</> template.")
+            self.line(
+                "This command will guide you through creating your <info>Telegram Bot</> template."
+            )
             self.line("")
 
         project_name = self.option("project-name")
@@ -50,6 +49,7 @@ class InitCommand(Command):
             bot_name = self.ask(question)
             while not self.check_answer(bot_name):
                 bot_name = self.ask(question)
+            bot_name = "".join(map(str.title, bot_name.split("_")))
 
         self.line(
             "\n<comment>API ID, API Hash and Bot Token are optional.\n"
@@ -75,18 +75,21 @@ class InitCommand(Command):
         userbot = self.option("userbot")
         if not userbot:
             userbot = False
-            question = self.create_question(f"Is user bot?:", default=userbot, type="confirmation")
+            question = self.create_question(
+                "Is user bot?:", default=userbot, type="confirmation"
+            )
             userbot = self.ask(question)
 
         venv_type = self.option("venv-type")
         if not venv_type:
             venv_type = "no"
             question = self.create_question(
-                "Virtual enviroment? Built-In, Poetry, No Venv (b/p/n):", default=venv_type
+                "Virtual environment? Built-In, Poetry, No Venv (b/p/n):",
+                default=venv_type,
             )
             venv_type = self.ask(question).lower()
 
-        venvs = {"b": "Standart", "p": "Poetry"}
+        venvs = {"b": "Standard", "p": "Poetry"}
 
         self.line(
             f"<info>Project Name  :</> <comment>{project_name}\n</>"
@@ -98,7 +101,9 @@ class InitCommand(Command):
             f"<info>BOT_TOKEN     :</> <comment>{'Provided.' if bot_token else 'Not provided.'}\n</>"
         )
 
-        question = self.create_question("Do you confirm generation?:", default=True, type="confirmation")
+        question = self.create_question(
+            "Do you confirm generation?:", default=True, type="confirmation"
+        )
         confirm = self.ask(question)
 
         if not confirm:

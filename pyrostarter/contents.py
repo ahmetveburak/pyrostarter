@@ -10,30 +10,33 @@ if __name__ == "__main__":
 API_ID = api_id
 API_HASH = api_hash
 BOT_TOKEN = bot_token
-    """,
+""",
     "user_config": """\
 [pyrouser]
 API_ID = 
 API_HASH = 
 BOT_TOKEN = 
 USER_CONF = 
-    """,
+""",
     "botconfig": """\
-from pyrogram import Client, filters
-from pyrogram.types import Message
-
+from configparser import ConfigParser
 from functools import partial
+
+from pyrogram import Client, filters
 
 command = partial(filters.command, prefixes=["!", "/", "."])
 
 
-class BOT_NAME(Client, Message):
+class BOT_NAME(Client):
     def __init__(self):
         module_name = "MODULE_NAME"
-        name = self.__class__.__name__.lower()
+        self.name = self.__class__.__name__.lower()
+        config = self.load_config()
         super().__init__(
-            session_name=name,
-            config_file=f"{name}.ini",
+            name=self.name,
+            api_id=config["api_id"],
+            api_hash=config["api_hash"],
+            bot_token=config["bot_token"],
             workers=8,
             plugins=dict(root=f"{module_name}/plugins"),
         )
@@ -43,17 +46,25 @@ class BOT_NAME(Client, Message):
 
     async def stop(self, *args):
         await super().stop()
+
+    def load_config(self):
+        config = ConfigParser()
+        config.read(f"{self.name}.ini")
+        return config["pyrogram"]
 """,
     "plugin": """\
+import asyncio
+import time
+
 from pyrogram import Client, filters
-from pyrogram.types import Message, CallbackQuery
-from MODULE_NAME.BotConfig import BOT_NAME, command
-from MODULE_NAME.utils import buttonator
-import asyncio, time
+from pyrogram.types import CallbackQuery, Message
+
+from starter.BotConfig import command, BOT_NAME
+from starter.utils import buttonator
 
 
 @BOT_NAME.on_message(command("start"))
-async def say_hello(client: Client, message: Message) -> None:
+async def say_hello(_: Client, message: Message) -> None:
     msg = await message.reply_text(text="`Hello..`", quote=True)
     await asyncio.sleep(1)
     await msg.edit_text(text="`Hello I'm Ready to Use`")
@@ -86,7 +97,6 @@ async def buttons(client: Client, message: Message):
             text="These are test buttons with callback",
             reply_markup=buttonator.button_maker(buttons=my_buttons, size=2),
         )
-
     else:
         await message.reply_text(
             text="Users can not send `keyboard markup`. **I'm sorry..**",
@@ -122,7 +132,7 @@ license = "YOUR LICENSE"
 
 [tool.poetry.dependencies]
 python = "^3.9"
-Pyrogram = "^1.2.9"
+Pyrogram = "^2.0.0"
 TgCrypto = "^1.2.2"
 
 [tool.poetry.dev-dependencies]
@@ -132,7 +142,7 @@ requires = ["poetry-core>=1.0.0"]
 build-backend = "poetry.core.masonry.api"
 """,
     "requirements": """\
-pyrogram>=1.2.9;
+pyrogram>=2.0.0;
 tgcrypto>=1.2.2;
 """,
 }
