@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "pyrostarter"
-version = "0.2.1"
+version = "0.3.0"
 description = "Pyrogram CLI Template Creator"
 authors = ["ahmetveburak <ahmetbozyurtt@gmail.com>"]
 license = "GNU General Public License v3 or later (GPLv3+)"
