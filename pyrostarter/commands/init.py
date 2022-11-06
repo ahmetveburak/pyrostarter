@@ -76,7 +76,7 @@ class InitCommand(Command):
         if not userbot:
             userbot = False
             question = self.create_question(
-                f"Is user bot?:", default=userbot, type="confirmation"
+                "Is user bot?:", default=userbot, type="confirmation"
             )
             userbot = self.ask(question)
 

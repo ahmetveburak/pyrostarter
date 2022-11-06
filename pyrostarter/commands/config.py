@@ -78,7 +78,7 @@ class ConfigCommand(Command):
         userbot = self.option("userbot")
         if not userbot:
             question = self.create_question(
-                f"Is userbot?:", default=False, type="confirmation"
+                "Is userbot?:", default=False, type="confirmation"
             )
             userbot = f"{self.ask(question)}"
 

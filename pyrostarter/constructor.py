@@ -15,7 +15,7 @@ def builtin_venv() -> None:
         )
         venv_manager.create(".venv")
 
-        with open(f"requirements.txt", "w", encoding="utf-8") as f:
+        with open("requirements.txt", "w", encoding="utf-8") as f:
             f.write(phrases["requirements"])
 
     except ModuleNotFoundError:
@@ -23,7 +23,7 @@ def builtin_venv() -> None:
 
 
 def poetry_venv(project_name: str) -> None:
-    with open(f"pyproject.toml", "w", encoding="utf-8") as f:
+    with open("pyproject.toml", "w", encoding="utf-8") as f:
         f.write(phrases["poetry"].replace("MODULE_NAME", project_name))
 
 
