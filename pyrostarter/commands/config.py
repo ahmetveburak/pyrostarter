@@ -17,7 +17,9 @@ class ConfigCommand(Command):
         option("api-hash", "a", description="Telegram API Hash.", flag=False),
         option("bot-token", "t", description="Bot Token.", flag=False),
         option("userbot", "u", description="Is userbot?.", flag=False),
-        option("clear", "c", description="Clear your id/hash/token fields.", flag=False),
+        option(
+            "clear", "c", description="Clear your id/hash/token fields.", flag=False
+        ),
     ]
 
     def __init__(self):
@@ -40,7 +42,7 @@ class ConfigCommand(Command):
         """
         Creates an empty config file at home directory with predefined settings
         """
-        with open(self.config_file_path, "w") as f:
+        with open(self.config_file_path, "w", encoding="utf-8") as f:
             f.write(phrases["user_config"].lower())
 
     def handle(self) -> Optional[int]:
@@ -52,7 +54,10 @@ class ConfigCommand(Command):
 
         if self.io.is_interactive():
             self.line("")
-            self.line("Create your <info>.pyrouser.ini</> config.\n" "Pass for unchanged infos.")
+            self.line(
+                "Create your <info>.pyrouser.ini</> config.\n"
+                "Pass for unchanged infos."
+            )
             self.line("")
 
         api_id = self.option("api-id")
@@ -72,7 +77,9 @@ class ConfigCommand(Command):
 
         userbot = self.option("userbot")
         if not userbot:
-            question = self.create_question(f"Is userbot?:", default=False, type="confirmation")
+            question = self.create_question(
+                f"Is userbot?:", default=False, type="confirmation"
+            )
             userbot = f"{self.ask(question)}"
 
         config = self.get_config()
@@ -82,5 +89,5 @@ class ConfigCommand(Command):
         user_config["BOT_TOKEN"] = bot_token if bot_token else user_config["BOT_TOKEN"]
         user_config["USER_CONF"] = f"{userbot}"
 
-        with open(self.config_file_path, "w") as f:
+        with open(self.config_file_path, "w", encoding="utf-8") as f:
             config.write(f)

@@ -15,7 +15,7 @@ def builtin_venv() -> None:
         )
         venv_manager.create(".venv")
 
-        with open(f"requirements.txt", "w") as f:
+        with open(f"requirements.txt", "w", encoding="utf-8") as f:
             f.write(phrases["requirements"])
 
     except ModuleNotFoundError:
@@ -23,8 +23,8 @@ def builtin_venv() -> None:
 
 
 def poetry_venv(project_name: str) -> None:
-    f = open(f"pyproject.toml", "w")
-    f.write(phrases["poetry"].replace("MODULE_NAME", project_name))
+    with open(f"pyproject.toml", "w", encoding="utf-8") as f:
+        f.write(phrases["poetry"].replace("MODULE_NAME", project_name))
 
 
 def builder(
@@ -47,20 +47,21 @@ def builder(
     file_list: list = ["/__main__.py", "/BotConfig.py", "/plugins/say_hello.py"]
     file_phrases: list = ["main", "botconfig", "plugin"]
 
-    with open(f"{project_name}/__init__.py", "w") as f:
+    with open(f"{project_name}/__init__.py", "w", encoding="utf-8") as f:
         f.write('__version__ = "0.1.0"')
 
     for file, phrase in zip(file_list, file_phrases):
-        open(f"{project_name}{file}", "w").write(
-            phrases[phrase]
-            .replace("BOT_NAME", bot_name)
-            .replace("MODULE_NAME", project_name)
-        )
+        with open(f"{project_name}{file}", "w", encoding="utf-8") as f:
+            f.write(
+                phrases[phrase]
+                .replace("BOT_NAME", bot_name)
+                .replace("MODULE_NAME", project_name)
+            )
 
-    with open(f"{project_name}/utils/buttonator.py", "w") as f:
+    with open(f"{project_name}/utils/buttonator.py", "w", encoding="utf-8") as f:
         f.write(phrases["util"])
 
-    with open(f"{bot_name.lower()}.ini", "w") as f:
+    with open(f"{bot_name.lower()}.ini", "w", encoding="utf-8") as f:
         f.write(
             phrases["config"]
             .replace("api_id", api_id)
