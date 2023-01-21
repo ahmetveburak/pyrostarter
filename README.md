@@ -1,6 +1,6 @@
 # Pyrostarter
 
-A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) ready to start project structure. (*All my lazy options included.* 😄)
+A CLI tool for creating [Pyrogram](https://docs.pyrogram.org/) ready to start project structure.
 
 ## Overview
 
